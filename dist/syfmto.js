@@ -44,7 +44,7 @@ var Validation = function () {
     }, {
         key: 'fold',
         value: function fold(f1, f2) {
-            return this.success ? f1(this.value) : f2(this.value);
+            return this.isSuccess ? f1(this.value) : f2(this.value);
         }
     }, {
         key: 'isSuccess',
