@@ -4,7 +4,7 @@
   "description": "Fantasy-land compatible Validation based upon Ramda.",
   "main": "index.js",
   "repository": {},
-  "author": "Rob Porter <rob@inpictures.ca>, Shintaro Murakami",
+  "author": "Rob Porter <rob@inpictures.ca>",
   "license": "MIT",
   "scripts": {
     "build": "./node_modules/browserify/bin/cmd.js ./src/index.js -o ./dist/syfmto.js -s Validation --no-bundle-external -t [ babelify --presets [ es2015 react ] ]"
