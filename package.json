@@ -1,0 +1,30 @@
+{
+  "name": "syfmto",
+  "version": "0.1.0",
+  "description": "Fantasy-land compatible Validation based upon Ramda.",
+  "main": "index.js",
+  "repository": {},
+  "author": "Rob Porter <rob@inpictures.ca>, Shintaro Murakami",
+  "license": "MIT",
+  "scripts": {
+    "build": "./node_modules/browserify/bin/cmd.js ./src/index.js -o ./dist/syfmto.js -s Validation --no-bundle-external -t [ babelify --presets [ es2015 react ] ]"
+  },
+  "dependencies": {
+    "ramda": "^0.23.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.0.0",
+    "browserify-shim": "^3.8.13"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "ramda": "global:R"
+  }
+}
