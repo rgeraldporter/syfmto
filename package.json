@@ -1,13 +1,23 @@
 {
   "name": "syfmto",
-  "version": "0.1.1",
+  "version": "0.2.0",
+  "preferGlobal": false,
   "description": "Fantasy-land compatible Validation based upon Ramda.",
   "main": "index.js",
-  "repository": {},
+  "keywords": [
+    "functional",
+    "ramda",
+    "validation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rgeraldporter/syfmto.git"
+  },
   "author": "Rob Porter <rob@inpictures.ca>",
   "license": "MIT",
   "scripts": {
-    "build": "./node_modules/browserify/bin/cmd.js ./src/index.js -o ./dist/syfmto.js -s Validation --no-bundle-external -t [ babelify --presets [ es2015 react ] ]"
+    "build": "./node_modules/browserify/bin/cmd.js ./src/index.js -o ./dist/syfmto.js -s Validation --no-bundle-external -t [ babelify --presets [ es2015 react ] ]",
+    "unit": "find ./src -name '*.spec.js' | ./node_modules/cross-env/bin/cross-env.js NODE_ENV=test xargs babel-node ./node_modules/jasmine/bin/jasmine.js"
   },
   "dependencies": {
     "ramda": "^0.23.0"
@@ -17,7 +27,9 @@
     "babel-preset-react": "^6.22.0",
     "babelify": "^7.3.0",
     "browserify": "^14.0.0",
-    "browserify-shim": "^3.8.13"
+    "browserify-shim": "^3.8.13",
+    "cross-env": "^3.1.4",
+    "jasmine": "^2.5.3"
   },
   "browserify": {
     "transform": [

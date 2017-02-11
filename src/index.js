@@ -1,96 +1,39 @@
 import * as R from 'ramda';
 
-class Validation {
-    constructor(value) {
-        this.value = value;
-    }
+const Validation = x =>
+({
+    map: f => Validation(f(x)),
+    fold: f => f(x),
+    liftAN: (n, f) => R.curryN(
+        n,
+        (...validations) => R.reduce(
+            (a, b) => a.ap(b),
+            R.head(validations).map(R.curry(f)),
+            R.tail(validations)
+        )
+    )
+});
 
-    equals(that) {
-        return that instanceof this.constructor && R.equals(this.value, that.value);
-    }
+// Success is not a monoid
+const Success = x => ({
+    map: f => Success(f(x)),
+    chain: f => f(x),
+    fold: (f, g) => f(x),
+    inspect: () => `Success(${x})`,
+    ap: y => y.isSuccess ? y.map(x) : y,
+    isSuccess: true
+});
 
-    map() {
-        return this;
-    }
+// Failure is a monoid?
+const Failure = x => ({
+    map: f => Failure(x),
+    chain: f => Failure(x),
+    fold: (f, g) => g(x),
+    inspect: () => `Failure(${x})`,
+    concat: o =>
+        o.fold(null, r => Failure(x.concat(r))),
+    ap: y => y.isSuccess ? Failure(x) : y.concat(Failure(x)),
+    isSuccess: false
+});
 
-    // Validation is Applicative, this method does not satisfy Monad Laws.
-    nonMonadicChain() {
-        return this;
-    }
-
-    get isSuccess() {
-        return false;
-    }
-
-    get isFailure() {
-        return false;
-    }
-
-    fold(f1, f2) {
-        return this.isSuccess ? f1(this.value) : f2(this.value);
-    }
-
-    static of(value) {
-        return new Success(value);
-    }
-
-    static success(value) {
-        return Validation.of(value);
-    }
-
-    static failure(value) {
-        return new Failure(value);
-    }
-
-    static liftAN(n, fn) {
-        return R.curryN(n, function(...validations) {
-            return R.reduce((a1, a2) => a1.ap(a2), R.head(validations).map(R.curry(fn)), R.tail(validations));
-        });
-    }
-}
-
-class Success extends Validation {
-    constructor(x) {
-        super(x);
-    }
-
-    map(fn) {
-        return new Success(fn(this.value));
-    }
-
-    ap(that) {
-        return that.isSuccess ? that.map(this.value) : that;
-    }
-
-    nonMonadicChain(fn) {
-        return fn(this.value);
-    }
-
-    get isSuccess() {
-        return true;
-    }
-
-    toString() {
-        return `Validation.Success(${R.toString(this.value)})`;
-    }
-}
-
-class Failure extends Validation {
-    constructor(x) {
-        super(x);
-    }
-
-    ap(that) {
-        return that.isSuccess ? this : new Failure(this.value.concat(that.value));
-    }
-
-    get isFailure() {
-        return true;
-    }
-
-    toString() {
-        return `Validation.Failure(${R.toString(this.value)})`;
-    }
-}
-
-module.exports = Validation;
+module.exports = { Validation, Success, Failure };
