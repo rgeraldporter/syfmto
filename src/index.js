@@ -1,13 +1,10 @@
 import * as R from 'ramda';
 
-const Validation = x => ({
-    map: f => Validation(f(x)),
-    fold: f => f(x),
-    liftAN: (n, f) => R.curryN(
-        n,
-        (...validations) => R.reduce((a, b) => a.ap(b), R.head(validations).map(R.curry(f)), R.tail(validations))
-    )
-});
+const liftAN = (n, f) => R.curryN(
+    n,
+    // (acc, value) -> .ap is applied for each N, starting with R.head then ...R.tail
+    (...validations) => R.reduce((a, b) => a.ap(b), R.head(validations).map(R.curryN(n, f)), R.tail(validations))
+);
 
 const Success = x => ({
     map: f => Success(f(x)),
@@ -28,4 +25,4 @@ const Failure = x => ({
     isSuccess: false
 });
 
-module.exports = { Validation, Success, Failure };
+export {liftAN, Success, Failure}
