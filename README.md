@@ -1,5 +1,5 @@
 # Syfmto
-### v0.3.0
+### v0.3.1
 
 Syfmto (["sometimes you fail more than once"](http://robotlolita.me/2013/12/08/a-monad-in-practicality-first-class-failures.html#sometimes-you-fail-more-than-once)) is a [Fantasy-land](https://github.com/fantasyland/fantasy-land) compatible Validation based upon Ramda.
 
