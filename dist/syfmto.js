@@ -2,35 +2,31 @@
 (function (global){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Failure = exports.Success = exports.liftAN = undefined;
+
 var _ramda = (typeof window !== "undefined" ? window['R'] : typeof global !== "undefined" ? global['R'] : null);
 
 var R = _interopRequireWildcard(_ramda);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var Validation = function Validation(x) {
-    return {
-        map: function map(f) {
-            return Validation(f(x));
-        },
-        fold: function fold(f) {
-            return f(x);
-        },
-        liftAN: function liftAN(n, f) {
-            return R.curryN(n, function () {
-                for (var _len = arguments.length, validations = Array(_len), _key = 0; _key < _len; _key++) {
-                    validations[_key] = arguments[_key];
-                }
-
-                return R.reduce(function (a, b) {
-                    return a.ap(b);
-                }, R.head(validations).map(R.curry(f)), R.tail(validations));
-            });
+var liftAN = function liftAN(n, f) {
+    return R.curryN(n,
+    // (acc, value) -> .ap is applied for each N, starting with R.head then ...R.tail
+    function () {
+        for (var _len = arguments.length, validations = Array(_len), _key = 0; _key < _len; _key++) {
+            validations[_key] = arguments[_key];
         }
-    };
+
+        return R.reduce(function (a, b) {
+            return a.ap(b);
+        }, R.head(validations).map(R.curryN(n, f)), R.tail(validations));
+    });
 };
 
-// Success is not a monoid
 var Success = function Success(x) {
     return {
         map: function map(f) {
@@ -52,7 +48,6 @@ var Success = function Success(x) {
     };
 };
 
-// Failure is a monoid?
 var Failure = function Failure(x) {
     return {
         map: function map(f) {
@@ -79,7 +74,9 @@ var Failure = function Failure(x) {
     };
 };
 
-module.exports = { Validation: Validation, Success: Success, Failure: Failure };
+exports.liftAN = liftAN;
+exports.Success = Success;
+exports.Failure = Failure;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}]},{},[1])(1)

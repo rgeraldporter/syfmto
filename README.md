@@ -1,13 +1,57 @@
 # Syfmto
-### v0.3.1
+### v0.3.2
 
-Syfmto (["sometimes you fail more than once"](http://robotlolita.me/2013/12/08/a-monad-in-practicality-first-class-failures.html#sometimes-you-fail-more-than-once)) is a [Fantasy-land](https://github.com/fantasyland/fantasy-land) compatible Validation based upon Ramda.
+Syfmto (["sometimes you fail more than once"](http://robotlolita.me/2013/12/08/a-monad-in-practicality-first-class-failures.html#sometimes-you-fail-more-than-once)) is a [Fantasy-land](https://github.com/fantasyland/fantasy-land) compatible validation module built upon Ramda.
 
 This is much like `Left` & `Right` except that it allows the propagation of successive successes or failures via applicative functors.
 
 ## Status
 
-This is a work in progress. The API will change.
+This is a work in progress. The API may change.
+
+## Example
+
+Currently this imports with three exposed functions: `Success`, `Failure`, and `liftAN`.
+
+```
+const validUsername = username => username.length > 5
+    ? Success(username)
+    : Failure([ 'Your username must be over 5 characters long' ]);
+    
+const validAge = age => age > 13
+    ? Success(age)
+    : Failure([ 'You must be over 13' ])
+
+const validPassword = password => (/[A-Z]/).test(password)
+    ? Success(password)
+    : Failure([ 'Your password must include a capital letter' ]);
+
+const user = {
+    username: 'blahblah',
+    age: 17,
+    password: '6aNh*89'
+};
+
+// Success({ username: 'blahblah', age: 17, password: '6aNh*89' })
+const result = liftAN(3, () => user)
+    (validUsername(user.username))
+    (validAge(user.age))
+    (validPassword(user.password));
+
+const user2 = {
+    username: 'blah',
+    age: 12,
+    password: 'badpass'
+};
+
+// Failure(Your password must include a capital letter,You must be over 13,Your username must be over 5 characters long)
+const result = liftAN(3, () => user2)
+    (validUsername(user2.username))
+    (validAge(user2.age))
+    (validPassword(user2.password));
+```
+
+You can see the unit test spec files for more examples. `liftAN`, much like `R.curryN` must specify a value `n` for its arity.
 
 ## License
 

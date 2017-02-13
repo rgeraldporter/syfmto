@@ -1,6 +1,6 @@
 {
   "name": "syfmto",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "preferGlobal": false,
   "description": "Fantasy-land compatible Validation based upon Ramda.",
   "main": "index.js",

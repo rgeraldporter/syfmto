@@ -86,4 +86,51 @@ describe('The library', () => {
 
         expect(result.inspect()).toBe('Failure(Value is too low!)');
     });
+
+    const validUsername = username => username.length > 5
+        ? Success(username)
+        : Failure([ 'Your username must be over 5 characters long' ]);
+        
+    const validAge = age => age > 13
+        ? Success(age)
+        : Failure([ 'You must be over 13' ])
+
+    const validPassword = password => (/[A-Z]/).test(password)
+        ? Success(password)
+        : Failure([ 'Your password must include a capital letter' ]);
+
+    const user = {
+        username: 'blahblah',
+        age: 17,
+        password: '6aNh*89'
+    };
+
+    it('should have a functioning success example from the README', () => {
+        const result = liftAN(3, () => user)
+            (validUsername(user.username))
+            (validAge(user.age))
+            (validPassword(user.password));
+
+        // if "g is not a function" this failed
+        result.fold(x => expect(x.age).toBe(17));
+    });
+
+    const user2 = {
+        username: 'blah',
+        age: 12,
+        password: 'badpass'
+    };
+
+    it('should have a functioning failure example from the README', () => {
+        const result = liftAN(3, () => user2)
+            (validUsername(user2.username))
+            (validAge(user2.age))
+            (validPassword(user2.password));
+
+        // if "g is not a function" this failed
+        result.fold(null, x => expect(x.toString())
+            .toBe('Your password must include a capital letter,You must be over 13,'+
+                'Your username must be over 5 characters long'));
+    });
+
 });
