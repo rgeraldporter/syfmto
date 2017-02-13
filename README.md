@@ -45,7 +45,7 @@ const user2 = {
 };
 
 // Failure(Your password must include a capital letter,You must be over 13,Your username must be over 5 characters long)
-const result = liftAN(3, () => user2)
+const result2 = liftAN(3, () => user2)
     (validUsername(user2.username))
     (validAge(user2.age))
     (validPassword(user2.password));
