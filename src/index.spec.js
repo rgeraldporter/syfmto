@@ -127,7 +127,7 @@ describe('The library', () => {
             (validAge(user2.age))
             (validPassword(user2.password));
 
-        // if "g is not a function" this failed
+        // if "f is not a function" this failed
         result.fold(null, x => expect(x.toString())
             .toBe('Your password must include a capital letter,You must be over 13,'+
                 'Your username must be over 5 characters long'));

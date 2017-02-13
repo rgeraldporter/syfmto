@@ -44,7 +44,7 @@ const user2 = {
     password: 'badpass'
 };
 
-// Failure(Your password must include a capital letter,You must be over 13,Your username must be over 5 characters long)
+// Failure(['Your password must include a capital letter', 'You must be over 13', 'Your username must be over 5 characters long'])
 const result2 = liftAN(3, () => user2)
     (validUsername(user2.username))
     (validAge(user2.age))
