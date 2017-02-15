@@ -113,6 +113,8 @@ describe('The library', () => {
 
         // if "g is not a function" this failed
         result.fold(x => expect(x.age).toBe(17));
+        result.fold(x => expect(x.username).toBe('blahblah'));
+        result.fold(x => expect(x.password).toBe('6aNh*89'));
     });
 
     const user2 = {
