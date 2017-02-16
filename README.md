@@ -1,5 +1,6 @@
 # Syfmto
-### v0.4.0
+### v0.4.1
+[![Build Status](https://travis-ci.org/rgeraldporter/syfmto.svg?branch=master)](https://travis-ci.org/rgeraldporter/syfmto)
 
 Syfmto (["sometimes you fail more than once"](http://robotlolita.me/2013/12/08/a-monad-in-practicality-first-class-failures.html#sometimes-you-fail-more-than-once)) is a [Fantasy-land](https://github.com/fantasyland/fantasy-land) compatible validation module built upon Ramda.
 
