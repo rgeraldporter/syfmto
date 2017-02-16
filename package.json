@@ -17,7 +17,7 @@
   "license": "MIT",
   "scripts": {
     "build": "./node_modules/browserify/bin/cmd.js ./src/index.js -o ./dist/syfmto.js -s Validation --no-bundle-external -t [ babelify --presets [ es2015 react ] ] && babel --presets es2015 src -d app",
-    "unit": "find ./src -name '*.spec.js' | ./node_modules/cross-env/bin/cross-env.js NODE_ENV=test xargs babel-node ./node_modules/jasmine/bin/jasmine.js"
+    "unit": "find ./app -name '*.spec.js' | ./node_modules/cross-env/bin/cross-env.js NODE_ENV=test xargs node ./node_modules/jasmine/bin/jasmine.js"
   },
   "dependencies": {
     "ramda": "0.23.0"
