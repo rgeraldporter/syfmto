@@ -1,5 +1,5 @@
 # Syfmto
-### v0.4.1
+### v0.4.2
 [![Build Status](https://travis-ci.org/rgeraldporter/syfmto.svg?branch=master)](https://travis-ci.org/rgeraldporter/syfmto)
 
 Syfmto (["sometimes you fail more than once"](http://robotlolita.me/2013/12/08/a-monad-in-practicality-first-class-failures.html#sometimes-you-fail-more-than-once)) is a [Fantasy-land](https://github.com/fantasyland/fantasy-land) compatible validation module built upon Ramda.
@@ -15,6 +15,8 @@ This is a work in progress. The API may change.
 Currently this imports with three exposed functions: `Success`, `Failure`, and `liftAN`.
 
 ```
+import {liftAN, Success, Failure} from 'syfmto';
+
 const validUsername = username => username.length > 5
     ? Success(username)
     : Failure([ 'Your username must be over 5 characters long' ]);
