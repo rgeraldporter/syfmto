@@ -1,13 +1,16 @@
 {
   "name": "syfmto",
-  "version": "0.4.2",
+  "version": "1.0.0",
   "preferGlobal": false,
-  "description": "Fantasy-land compatible Validation based upon Ramda.",
+  "description": "A functional-style validation module, allowing you to aggregate multiple failures rather than throwing at the first error.",
   "main": "./app/index.js",
   "keywords": [
     "functional",
     "ramda",
-    "validation"
+    "validation",
+    "error handling",
+    "success",
+    "failure"
   ],
   "repository": {
     "type": "git",
