@@ -1,5 +1,5 @@
 # Syfmto
-### v1.0.0
+### v1.1.0
 [![Build Status](https://travis-ci.org/rgeraldporter/syfmto.svg?branch=master)](https://travis-ci.org/rgeraldporter/syfmto)
 
 Syfmto (["sometimes you fail more than once"](http://robotlolita.me/2013/12/08/a-monad-in-practicality-first-class-failures.html#sometimes-you-fail-more-than-once)) is a [Fantasy-land](https://github.com/fantasyland/fantasy-land) compatible validation module built upon Ramda.
@@ -8,7 +8,7 @@ This is much like `Left` & `Right` except that it allows the propagation of succ
 
 ## But what does any of that mean?
 
-Functional programming can be a bit dense, to say the least. So I'm hoping the following can act as a better description that isn't too esoteric.
+Functional programming can tough to get a grasp of if you're not familiar with it. So I'm hoping the following can act as a better description that isn't too esoteric.
 
 Traditionally in JavaScript you would use `try`, `catch`, and `throw` (or their `Promise`-based equivalents) to handle predicted and non-predicted errors. This can be quite limiting though, allowing only one caught error at a time, and not allowing for more nuanced handling of errors.
 
@@ -20,7 +20,7 @@ In short, you want to collect errors like any normal data, and not react to them
 
 Syfmto imports with three exposed functions: `Success`, `Failure`, and `liftAN`.
 
-`liftAN` is a `lift` in functional programming terms. This function takes `n` number of functions that can only return `Success` or `Failures`, and a function to pass into a `Success` result if no Failures are returned by any of those functions.
+`liftAN` is a `lift` in functional programming terms. This function takes `n` number of functions that can only return `Success` or `Failures`, and a function to pass into a `Success` result if no `Failure`s are returned by any of those functions.
 
 ```
 // n = 2, must line up with the number of functions in the second set of parentheses.

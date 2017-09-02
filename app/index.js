@@ -30,6 +30,9 @@ var Success = function Success(x) {
         map: function map(f) {
             return Success(f(x));
         },
+        fmap: function fmap(f) {
+            return Success(f(x));
+        },
         chain: function chain(f) {
             return f(x);
         },
@@ -49,6 +52,9 @@ var Success = function Success(x) {
 var Failure = function Failure(x) {
     return {
         map: function map(f) {
+            return Failure(x);
+        },
+        fmap: function fmap(f) {
             return Failure(x);
         },
         chain: function chain(f) {

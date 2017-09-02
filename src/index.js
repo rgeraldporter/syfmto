@@ -8,6 +8,7 @@ const liftAN = (n, f) => R.curryN(
 
 const Success = x => ({
     map: f => Success(f(x)),
+    fmap: f => Success(f(x)),
     chain: f => f(x),
     fold: (f, g) => f(x),
     inspect: () => `Success(${x})`,
@@ -17,6 +18,7 @@ const Success = x => ({
 
 const Failure = x => ({
     map: f => Failure(x),
+    fmap: f => Failure(x),
     chain: f => Failure(x),
     fold: (f, g) => g(x),
     inspect: () => `Failure(${x})`,

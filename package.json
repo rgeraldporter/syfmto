@@ -1,6 +1,6 @@
 {
   "name": "syfmto",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "preferGlobal": false,
   "description": "A functional-style validation module, allowing you to aggregate multiple failures rather than throwing at the first error.",
   "main": "./app/index.js",
